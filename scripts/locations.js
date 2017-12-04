@@ -3,6 +3,9 @@ $(function() {
   $('#tabs').tabs();
   // call worldClock() with interval 1s
   $('body').onload = setInterval('localTime()', 1000);
+  $('button').on('click', function() {
+    $('.clock').slideToggle(1200);
+  })
 });
 
 /**
@@ -75,7 +78,7 @@ function localTime() {
 
   montrealTime = addTime(universalTime, (-300) * 60 * 1000);
   washingtonTime = addTime(universalTime, (-480) * 60 * 1000);
-  parisTime = universalTime;
+  parisTime = addTime(universalTime, 60 * 60 *1000);
   seoulTime = addTime(universalTime, 540 * 60 * 1000);
   melburneTime = addTime(universalTime, 660 * 60 * 1000);
 

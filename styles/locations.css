@@ -47,7 +47,15 @@ header p {
     padding-bottom: 10px;
 }
 
+button {
+    position: absolute;
+    left: 380px;
+    border-radius: 3px;
+    background-color: #add8e6;
+}
+
 .clock {
+    display: none;
     float: right;
     top: 5px;
     right: 5px;
