@@ -4,7 +4,7 @@ $(function() {
   // call worldClock() with interval 1s
   $('body').onload = setInterval('localTime()', 1000);
   $('button').on('click', function() {
-    $('.clock').slideToggle(1200);
+    $('.clock').slideToggle();
   })
 });
 
