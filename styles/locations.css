@@ -14,7 +14,7 @@ body {
 }
 
 main {
-    width: 60%;
+    width: 728px;
     margin: 0 auto;
 }
 
@@ -47,6 +47,7 @@ header p {
     padding-bottom: 10px;
 }
 
+/* style for taps */
 button {
     position: absolute;
     left: 380px;
@@ -88,4 +89,28 @@ h4 {
 div > p {
     clear: right;
     padding-top: 10px;
+}
+
+/* style for map */
+#caption {
+   text-align: center;
+   width: 100%;
+   float: left;
+   clear: left;
+   margin: 0.5em 0;
+   font-weight: bold;
+   font-size: 1.8em;
+}
+
+#map {
+   min-height: 300px;
+   width: 100%;
+   float: left;
+   clear: left;
+}
+
+@media all and (max-width: 500px) {
+   h1 {
+      font-size: 24px;
+   }
 }

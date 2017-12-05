@@ -1,3 +1,5 @@
+"use strict";
+
 $(function() {
   // jquery buitl-in to create tabs on web page
   $('#tabs').tabs();
@@ -95,3 +97,78 @@ function localTime() {
   document.getElementById('melburneDate').value = showDate(melburneTime);
   document.getElementById('seoulDate').value = showDate(seoulTime);
 }
+
+var waitForUser;
+
+function setUpPage() {
+  var buttons = document.getElementById('tabs').getElementsByTagName('a');
+  for (var idx in buttons) {
+    if (buttons[idx].addEventListener) {
+      buttons[idx].addEventListener('click', createMap, false);
+    }
+    else if (buttons[idx].attachEvent) {
+      buttons[idx].attachEvent('onclick', createMap);
+    }
+  }
+}
+
+function geoTest() {
+  waitForUser = setTimeout(fail, 10000);
+  if (navigator.geolocation) {
+    setTimeout(navigator.geolocation.getCurrentPosition(createMap, fail), 10000);
+  }
+  else {
+    fail();
+  }
+}
+
+function createMap(position) {
+  // Washington: 38.912749, -77.040679
+  // Montreal: 45.5057346,-73.6025516
+  // Paris: 48.862000, 2.349118
+  // Melbourne: -37.836873, 144.987056
+  // Seoul: 37.561210, 126.977462
+  var Lat, Lng;
+  clearTimeout(waitForUser);
+  if (position.coords) {
+    Lat = position.coords.latitude;
+    Lng = position.coords.longitude;
+  }
+  else {
+    var city = this.innerHTML;
+    if (city === 'Washington') {
+      Lat = 38.912749;
+      Lng = -77.040679;
+    }
+    else if (city === 'Montreal') {
+      Lat = 45.5057346;
+      Lng = -73.6025516;
+    }
+    else if (city === 'Paris') {
+      Lat = 48.862000;
+      Lng = 2.349118;
+    }
+    else if (city === 'Melbourne') {
+      Lat = -37.836873;
+      Lng = 144.987056;
+    }
+    else if (city === 'Seoul') {
+      Lat = 37.561210;
+      Lng = 126.977462;
+    }
+
+    document.getElementById('caption').innerHTML = city;
+  }
+
+  var mapOptions = {
+    center: new google.maps.LatLng(Lat, Lng),
+    zoom: 10
+  };
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+}
+
+function fail() {
+  document.getElementById('map').innerHTML = "Unable to access your current location.";
+}
+
+window.addEventListener('load', setUpPage, false);
